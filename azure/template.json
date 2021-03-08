@@ -49,9 +49,6 @@
         "sharedEnvResourceGroup": {
             "type": "string"
         },
-        "sharedServiceBusName": {
-            "type": "string"
-        },
         "sharedEnvVirtualNetworkName": {
             "type": "string"
         },
