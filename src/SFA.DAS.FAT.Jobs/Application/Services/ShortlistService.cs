@@ -24,5 +24,10 @@ namespace SFA.DAS.FAT.Jobs.Application.Services
 
             return shortlistUserIds.UserIds;
         }
+
+        public async Task DeleteShortlistForUser(Guid userId)
+        {
+            await _apiClient.Delete(new DeleteShortlistRequest(userId));
+        }
     }
 }
