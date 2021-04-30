@@ -6,11 +6,10 @@ using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using SFA.DAS.FAT.Jobs.Domain.Configuration;
 using SFA.DAS.FAT.Jobs.Domain.Interfaces;
-using SFA.DAS.FATJobs.Domain.Configuration;
 
 namespace SFA.DAS.FAT.Jobs.Infrastructure.Api
 {
-    public class ApiClient
+    public class ApiClient : IApiClient
     {
         private readonly HttpClient _client;
         private readonly FatJobsApiConfiguration _config;

@@ -6,7 +6,6 @@ using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using SFA.DAS.FAT.Jobs.Domain.Configuration;
-using SFA.DAS.FATJobs.Domain.Configuration;
 
 namespace SFA.DAS.FAT.Jobs.Endpoints
 {
