@@ -8,9 +8,10 @@ using Microsoft.Extensions.Options;
 using Moq;
 using Newtonsoft.Json;
 using NUnit.Framework;
+using SFA.DAS.FAT.Jobs.Domain.Configuration;
+using SFA.DAS.FAT.Jobs.Domain.Interfaces;
 using SFA.DAS.FAT.Jobs.Infrastructure.Api;
 using SFA.DAS.FATJobs.Domain.Configuration;
-using SFA.DAS.FATJobs.Domain.Interfaces;
 
 namespace SFA.DAS.FAT.Jobs.UnitTests.Infrastructure.Api
 {

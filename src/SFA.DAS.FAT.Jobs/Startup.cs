@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using SFA.DAS.Configuration.AzureTableStorage;
+using SFA.DAS.FAT.Jobs.Domain.Configuration;
 using SFA.DAS.FATJobs;
 using SFA.DAS.FATJobs.Domain.Configuration;
 

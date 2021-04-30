@@ -4,8 +4,9 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
+using SFA.DAS.FAT.Jobs.Domain.Configuration;
+using SFA.DAS.FAT.Jobs.Domain.Interfaces;
 using SFA.DAS.FATJobs.Domain.Configuration;
-using SFA.DAS.FATJobs.Domain.Interfaces;
 
 namespace SFA.DAS.FAT.Jobs.Infrastructure.Api
 {
@@ -41,6 +42,14 @@ namespace SFA.DAS.FAT.Jobs.Infrastructure.Api
             response.EnsureSuccessStatusCode();
             
             return default;
+        }
+        public async Task Delete(IDeleteApiRequest request)
+        {
+            AddHeaders();
+            var response = await _client.DeleteAsync(request.DeleteUrl)
+                .ConfigureAwait(false);
+
+            response.EnsureSuccessStatusCode();
         }
         
         private void AddHeaders()
