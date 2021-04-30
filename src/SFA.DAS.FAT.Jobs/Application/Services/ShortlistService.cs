@@ -8,7 +8,7 @@ using SFA.DAS.FAT.Jobs.Infrastructure.Api.Responses;
 
 namespace SFA.DAS.FAT.Jobs.Application.Services
 {
-    public class ShortlistService
+    public class ShortlistService : IShortlistService
     {
         private readonly IApiClient _apiClient;
 
