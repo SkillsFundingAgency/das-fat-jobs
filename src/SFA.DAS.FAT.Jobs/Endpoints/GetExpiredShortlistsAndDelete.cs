@@ -7,19 +7,20 @@ using SFA.DAS.FAT.Jobs.Domain.Interfaces;
 
 namespace SFA.DAS.FAT.Jobs.Endpoints
 {
-    public class GetExpiredShortlists
+    public class GetExpiredShortlistsAndDelete
     {
         private readonly IShortlistService _shortlistService;
 
-        public GetExpiredShortlists (IShortlistService shortlistService)
+        public GetExpiredShortlistsAndDelete (IShortlistService shortlistService)
         {
             _shortlistService = shortlistService;
         }
-        [FunctionName("GetExpiredShortlists")]
+        [FunctionName("GetExpiredShortlistsAndDelete")]
         public async Task RunAsync(
             [TimerTrigger("0 0 3 * * *")] TimerInfo myTimer, 
-            ILogger log,
-            [Queue("delete-shortlist")] ICollector<string> deleteShortlistQueue)
+            ILogger log
+            //[Queue("delete-shortlist")] ICollector<string> deleteShortlistQueue
+            )
         {
             log.LogInformation($"Get expired shortlists timer trigger function executed at: {DateTime.UtcNow}");
 
@@ -27,10 +28,11 @@ namespace SFA.DAS.FAT.Jobs.Endpoints
 
             foreach (var shortListId in shortListIds)
             {
-                deleteShortlistQueue.Add(shortListId.ToString());
+                await _shortlistService.DeleteShortlistForUser(shortListId);
             }
             
-            log.LogInformation($"Added {shortListIds.Count} shortlists to be deleted.");
+            log.LogInformation($"Deleted {shortListIds.Count} expired shortlists.");
         }
     }
+
 }
