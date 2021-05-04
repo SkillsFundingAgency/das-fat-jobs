@@ -5,14 +5,14 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using SFA.DAS.Configuration.AzureTableStorage;
+using SFA.DAS.FAT.Jobs;
 using SFA.DAS.FAT.Jobs.Application.Services;
 using SFA.DAS.FAT.Jobs.Domain.Configuration;
 using SFA.DAS.FAT.Jobs.Domain.Interfaces;
 using SFA.DAS.FAT.Jobs.Infrastructure.Api;
-using SFA.DAS.FATJobs;
 
 [assembly: FunctionsStartup(typeof(Startup))]
-namespace SFA.DAS.FATJobs
+namespace SFA.DAS.FAT.Jobs
 {
     
     public class Startup : FunctionsStartup
