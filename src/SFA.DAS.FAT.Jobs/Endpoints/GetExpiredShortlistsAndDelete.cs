@@ -17,7 +17,7 @@ namespace SFA.DAS.FAT.Jobs.Endpoints
         }
         [FunctionName("GetExpiredShortlistsAndDelete")]
         public async Task RunAsync(
-            [TimerTrigger("0 0 3 * * *")] TimerInfo myTimer, 
+            [TimerTrigger("0 0 2 * * *")] TimerInfo myTimer, 
             ILogger log
             //[Queue("delete-shortlist")] ICollector<string> deleteShortlistQueue
             )
