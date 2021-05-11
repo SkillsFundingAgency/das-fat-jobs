@@ -5,11 +5,14 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using SFA.DAS.Configuration.AzureTableStorage;
-using SFA.DAS.FATJobs;
-using SFA.DAS.FATJobs.Domain.Configuration;
+using SFA.DAS.FAT.Jobs;
+using SFA.DAS.FAT.Jobs.Application.Services;
+using SFA.DAS.FAT.Jobs.Domain.Configuration;
+using SFA.DAS.FAT.Jobs.Domain.Interfaces;
+using SFA.DAS.FAT.Jobs.Infrastructure.Api;
 
 [assembly: FunctionsStartup(typeof(Startup))]
-namespace SFA.DAS.FATJobs
+namespace SFA.DAS.FAT.Jobs
 {
     
     public class Startup : FunctionsStartup
@@ -45,11 +48,14 @@ namespace SFA.DAS.FATJobs
             }
             
             _configuration = config.Build();
+            builder.Services.AddOptions();
             builder.Services.Configure<FatJobsApiConfiguration>(_configuration.GetSection(nameof(FatJobsApiConfiguration)));
             builder.Services.AddSingleton(cfg => cfg.GetService<IOptions<FatJobsApiConfiguration>>().Value);
 
             builder.Services.AddSingleton(new FunctionEnvironment(configuration["EnvironmentName"]));
 
+            builder.Services.AddTransient<IShortlistService, ShortlistService>();
+            builder.Services.AddHttpClient<IApiClient, ApiClient>();
             
             builder.Services.BuildServiceProvider();
         }

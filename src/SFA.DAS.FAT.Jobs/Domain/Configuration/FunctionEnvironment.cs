@@ -1,4 +1,4 @@
-namespace SFA.DAS.FATJobs.Domain.Configuration
+namespace SFA.DAS.FAT.Jobs.Domain.Configuration
 {
     public class FunctionEnvironment
     {
