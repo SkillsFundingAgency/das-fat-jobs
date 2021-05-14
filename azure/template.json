@@ -27,6 +27,9 @@
             "type": "int",
             "defaultValue": 2
         },
+        "workerAccessRestrictions": {
+            "type": "array"
+        },
         "configNames": {
             "type": "string"
         },
@@ -262,6 +265,9 @@
                                 }
                             ]
                         }
+                    },
+                    "ipSecurityRestrictions": {
+                        "value": "[parameters('workerAccessRestrictions')]"
                     }
                 }
             },
