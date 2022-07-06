@@ -75,6 +75,10 @@
         },
         "loggingRedisKey": {
             "type": "string"
+        },
+        "utcValue": {
+            "type": "string",
+            "defaultValue": "[utcNow('yyMMddHHmmss')]"
         }
     },
     "variables": {
@@ -84,7 +88,8 @@
         "functionAppName": "[concat(variables('resourcePrefix'),'-fa')]",
         "resourceGroupName": "[concat(variables('resourcePrefix'), '-rg')]"
     },
-    "resources": [{
+    "resources": [
+        {
             "apiVersion": "2020-06-01",
             "name": "[variables('resourceGroupName')]",
             "type": "Microsoft.Resources/resourceGroups",
@@ -94,7 +99,7 @@
         },
         {
             "apiVersion": "2020-06-01",
-            "name": "function-app-service-plan",
+            "name": "[concat('function-app-service-plan-', parameters('utcValue'))]",
             "resourceGroup": "[variables('resourceGroupName')]",
             "type": "Microsoft.Resources/deployments",
             "properties": {
@@ -121,7 +126,7 @@
         },
         {
             "apiVersion": "2020-06-01",
-            "name": "function-app-subnet",
+            "name": "[concat('function-app-subnet-', parameters('utcValue'))]",
             "resourceGroup": "[parameters('sharedEnvResourceGroup')]",
             "type": "Microsoft.Resources/deployments",
             "properties": {
@@ -151,7 +156,7 @@
         },
         {
             "apiVersion": "2020-06-01",
-            "name": "function-app-insights",
+            "name": "[concat('function-app-insights-', parameters('utcValue'))]",
             "resourceGroup": "[variables('resourceGroupName')]",
             "type": "Microsoft.Resources/deployments",
             "properties": {
@@ -175,7 +180,7 @@
         },
         {
             "apiVersion": "2020-06-01",
-            "name": "apim-product-subscription",
+            "name": "[concat('apim-product-subscription-', parameters('utcValue'))]",
             "resourceGroup": "[parameters('sharedApimResourceGroup')]",
             "type": "Microsoft.Resources/deployments",
             "properties": {
@@ -199,7 +204,7 @@
         },
         {
             "apiVersion": "2020-06-01",
-            "name": "function-app",
+            "name": "[concat('function-app-', parameters('utcValue'))]",
             "resourceGroup": "[variables('resourceGroupName')]",
             "type": "Microsoft.Resources/deployments",
             "properties": {
@@ -219,11 +224,12 @@
                         "value": "[variables('resourceGroupName')]"
                     },
                     "subnetResourceId": {
-                        "value": "[reference('function-app-subnet').outputs.SubnetResourceId.value]"
+                        "value": "[reference(concat('function-app-subnet-', parameters('utcValue'))).outputs.SubnetResourceId.value]"
                     },
                     "functionAppAppSettings": {
                         "value": {
-                            "array": [{
+                            "array": [
+                                {
                                     "name": "ConfigurationStorageConnectionString",
                                     "value": "[parameters('configurationStorageConnectionString')]"
                                 },
@@ -241,7 +247,7 @@
                                 },
                                 {
                                     "name": "APPINSIGHTS_INSTRUMENTATIONKEY",
-                                    "value": "[reference('function-app-insights').outputs.InstrumentationKey.value]"
+                                    "value": "[reference(concat('function-app-insights-', parameters('utcValue'))).outputs.InstrumentationKey.value]"
                                 },
                                 {
                                     "name": "FUNCTIONS_EXTENSION_VERSION",
@@ -266,7 +272,7 @@
                                 {
                                     "name": "WEBSITE_RUN_FROM_PACKAGE",
                                     "value": "1"
-                                }                                
+                                }
                             ]
                         }
                     },
@@ -276,8 +282,8 @@
                 }
             },
             "dependsOn": [
-                "function-app-service-plan",
-                "function-app-insights"
+                "[concat('function-app-service-plan-', parameters('utcValue'))]",
+                "[concat('function-app-insights-', parameters('utcValue'))]"
             ]
         }
     ],
