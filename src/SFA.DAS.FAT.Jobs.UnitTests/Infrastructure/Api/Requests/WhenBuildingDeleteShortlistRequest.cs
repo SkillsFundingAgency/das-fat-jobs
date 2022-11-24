@@ -15,7 +15,7 @@ namespace SFA.DAS.FAT.Jobs.UnitTests.Infrastructure.Api.Requests
             var actual = new DeleteShortlistRequest(userId);
             
             //Assert
-            actual.DeleteUrl.Should().Be($"shortlist/users/{userId}");
+            actual.DeleteUrl.Should().Be($"api/shortlist/users/{userId}");
         }
     }
 }

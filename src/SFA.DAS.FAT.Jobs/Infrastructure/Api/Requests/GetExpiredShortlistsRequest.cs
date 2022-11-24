@@ -11,6 +11,6 @@ namespace SFA.DAS.FAT.Jobs.Infrastructure.Api.Requests
             _expiryInDays = expiryInDays;
         }
 
-        public string GetUrl => $"shortlist/expired?expiryInDays={_expiryInDays}";
+        public string GetUrl => $"api/shortlist/users/expired?expiryInDays={_expiryInDays}";
     }
 }

@@ -12,6 +12,6 @@ namespace SFA.DAS.FAT.Jobs.Infrastructure.Api.Requests
             _userId = userId;
         }
 
-        public string DeleteUrl => $"shortlist/users/{_userId}";
+        public string DeleteUrl => $"api/shortlist/users/{_userId}";
     }
 }

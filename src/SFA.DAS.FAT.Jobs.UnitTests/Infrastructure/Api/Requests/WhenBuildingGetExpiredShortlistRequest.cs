@@ -14,7 +14,7 @@ namespace SFA.DAS.FAT.Jobs.UnitTests.Infrastructure.Api.Requests
             var actual = new GetExpiredShortlistsRequest(expiryInDays);
             
             //Assert
-            actual.GetUrl.Should().Be($"shortlist/expired?expiryInDays={expiryInDays}");
+            actual.GetUrl.Should().Be($"api/shortlist/users/expired?expiryInDays={expiryInDays}");
         }
     }
 }
