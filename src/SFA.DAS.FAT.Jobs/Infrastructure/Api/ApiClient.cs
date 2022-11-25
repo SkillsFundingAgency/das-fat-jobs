@@ -53,6 +53,7 @@ namespace SFA.DAS.FAT.Jobs.Infrastructure.Api
         
         private void AddHeaders()
         {
+            _client.DefaultRequestHeaders.Clear();
             _client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", _config.Key);
             _client.DefaultRequestHeaders.Add("X-Version", "1");
         }
