@@ -1,10 +1,9 @@
 using Newtonsoft.Json;
 
-namespace SFA.DAS.FAT.Jobs.Domain.Interfaces
+namespace SFA.DAS.FAT.Jobs.Domain.Interfaces;
+
+public interface IGetApiRequest
 {
-    public interface IGetApiRequest
-    {
-        [JsonIgnore]
-        string GetUrl { get; }
-    }
+    [JsonIgnore]
+    string GetUrl { get; }
 }

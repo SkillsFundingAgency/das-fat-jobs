@@ -1,38 +1,23 @@
-using System;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.Azure.WebJobs;
+using Microsoft.Azure.Functions.Worker;
 using Microsoft.Extensions.Logging;
 using SFA.DAS.FAT.Jobs.Domain.Interfaces;
 
-namespace SFA.DAS.FAT.Jobs.Endpoints
+namespace SFA.DAS.FAT.Jobs.Endpoints;
+
+public class GetExpiredShortlistsAndDelete(IShortlistService _shortlistService, ILogger<GetExpiredShortlistsAndDelete> _logger)
 {
-    public class GetExpiredShortlistsAndDelete
+    [Function("ImpoGetExpiredShortlistsAndDeletetData")]
+    public async Task RunAsync([TimerTrigger("0 0 2 * * *", RunOnStartup = true)] TimerInfo timer)
     {
-        private readonly IShortlistService _shortlistService;
+        _logger.LogInformation("Get expired shortlists timer trigger function executed at: {DateTime}", DateTime.UtcNow);
 
-        public GetExpiredShortlistsAndDelete (IShortlistService shortlistService)
+        var shortListIds = (await _shortlistService.GetExpiredShortlists()).ToList();
+
+        foreach (var shortListId in shortListIds)
         {
-            _shortlistService = shortlistService;
+            await _shortlistService.DeleteShortlistForUser(shortListId);
         }
-        [FunctionName("GetExpiredShortlistsAndDelete")]
-        public async Task RunAsync(
-            [TimerTrigger("0 0 2 * * *")] TimerInfo myTimer, 
-            ILogger log
-            //[Queue("delete-shortlist")] ICollector<string> deleteShortlistQueue
-            )
-        {
-            log.LogInformation($"Get expired shortlists timer trigger function executed at: {DateTime.UtcNow}");
 
-            var shortListIds = (await _shortlistService.GetExpiredShortlists()).ToList();
-
-            foreach (var shortListId in shortListIds)
-            {
-                await _shortlistService.DeleteShortlistForUser(shortListId);
-            }
-            
-            log.LogInformation($"Deleted {shortListIds.Count} expired shortlists.");
-        }
+        _logger.LogInformation("Deleted {ShortListIdsCount} expired shortlists.", shortListIds.Count);
     }
-
 }

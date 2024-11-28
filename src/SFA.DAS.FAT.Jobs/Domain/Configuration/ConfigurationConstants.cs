@@ -1,7 +1,6 @@
-namespace SFA.DAS.FAT.Jobs.Domain.Configuration
+namespace SFA.DAS.FAT.Jobs.Domain.Configuration;
+
+public static class ConfigurationConstants
 {
-    public static class ConfigurationConstants
-    {
-        public static uint ExpiryPeriodInDays = 30;
-    }
+    public const uint ExpiryPeriodInDays = 30;
 }

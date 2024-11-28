@@ -4,7 +4,7 @@
 
 # Requirements
 
-DotNet Core 3.1 and any supported IDE for DEV running.
+DotNet 8.0 and any supported IDE for DEV running.
 
 Azure Storage Emulator
 
@@ -27,6 +27,21 @@ Data:
     {
         "BaseUrl":"https://localhost:5003/",
         "Key":"test"
+    }
+}
+
+```
+
+local.settings.json file:
+```
+{
+    "IsEncrypted": false,
+    "Values": {
+        "AzureWebJobsStorage": "UseDevelopmentStorage=true;",
+        "FUNCTIONS_WORKER_RUNTIME": "dotnet-isolated",
+        "ConfigurationStorageConnectionString": "UseDevelopmentStorage=true;",
+        "ConfigNames": "SFA.DAS.FAT.Jobs",
+        "EnvironmentName": "LOCAL"
     }
 }
 
