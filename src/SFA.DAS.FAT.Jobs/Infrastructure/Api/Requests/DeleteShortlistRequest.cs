@@ -1,17 +1,15 @@
-using System;
 using SFA.DAS.FAT.Jobs.Domain.Interfaces;
 
-namespace SFA.DAS.FAT.Jobs.Infrastructure.Api.Requests
+namespace SFA.DAS.FAT.Jobs.Infrastructure.Api.Requests;
+
+public class DeleteShortlistRequest : IDeleteApiRequest
 {
-    public class DeleteShortlistRequest : IDeleteApiRequest
+    private readonly Guid _userId;
+
+    public DeleteShortlistRequest(Guid userId)
     {
-        private readonly Guid _userId;
-
-        public DeleteShortlistRequest(Guid userId)
-        {
-            _userId = userId;
-        }
-
-        public string DeleteUrl => $"shortlist/users/{_userId}";
+        _userId = userId;
     }
+
+    public string DeleteUrl => $"shortlist/users/{_userId}";
 }

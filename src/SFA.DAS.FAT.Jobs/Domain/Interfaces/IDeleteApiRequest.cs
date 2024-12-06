@@ -1,10 +1,9 @@
 using Newtonsoft.Json;
 
-namespace SFA.DAS.FAT.Jobs.Domain.Interfaces
+namespace SFA.DAS.FAT.Jobs.Domain.Interfaces;
+
+public interface IDeleteApiRequest
 {
-    public interface IDeleteApiRequest
-    {
-        [JsonIgnore]
-        string DeleteUrl { get;}
-    }
+    [JsonIgnore]
+    string DeleteUrl { get;}
 }
